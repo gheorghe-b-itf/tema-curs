@@ -1,0 +1,84 @@
+body {
+    background-color: rgb(237, 237, 253);
+}
+
+h1 {
+    text-align: center;
+    font: bold 35px "cursive", Rockwell;
+    color: rgb(214, 21, 21);
+}
+
+.mainDiv {
+    margin: 70px 100px 100px 100px;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row;
+    color: rgb(209, 12, 12);
+    align-items: center;
+}
+
+.beginning {
+    margin: 20px 30px 0px 30px;
+    text-align: justify;
+}
+
+.header > img {
+    margin: 10px 20px 5px 20px ;
+    width: 95px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.subtitle {
+    display: flex;
+    flex-flow: row;
+    color: rgb(209, 12, 12);
+    background-color: rgb(228, 227, 227);
+    margin: 25px 30px 25px 30px;
+    font-size: 16px;
+    transition: font-size 2s;
+}
+
+.subtitle:hover {
+    font-size: 20px; 
+}
+
+.inSubtitle {
+    max-width: max-content;
+    display: flex;
+    flex-flow: row;
+}
+
+.fa {
+    color: rgb(209, 12, 12);
+    width: 20px;
+    height: 20px;
+    margin: 25px 10px 25px 30px;
+    
+}
+
+table {
+    margin-left: 30px;
+    margin-right: 50px;
+    font-size: larger;
+}
+
+th, td {
+    text-align: left;
+}
+
+th {
+    width: 200px;
+}
+
+.workExpTD  {
+    
+    text-align: right;
+}
+
+.work {
+    width:100%;
+}

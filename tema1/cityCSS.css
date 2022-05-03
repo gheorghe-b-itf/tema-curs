@@ -1,0 +1,17 @@
+h1 {
+    color: orange;
+    text-align: center;
+}
+
+a {
+    text-decoration-color:orange
+}
+
+p {
+    text-align: center;
+}
+
+.img {
+    margin: auto;
+    display: block;
+}
