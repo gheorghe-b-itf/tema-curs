@@ -25,8 +25,8 @@ h1 {
     text-align: justify;
 }
 
-.header > img {
-    margin: 10px 20px 5px 20px ;
+.header>img {
+    margin: 10px 20px 5px 20px;
     width: 95px;
     height: 100px;
     border-radius: 50%;
@@ -43,7 +43,7 @@ h1 {
 }
 
 .subtitle:hover {
-    font-size: 20px; 
+    font-size: 20px;
 }
 
 .inSubtitle {
@@ -57,7 +57,7 @@ h1 {
     width: 20px;
     height: 20px;
     margin: 25px 10px 25px 30px;
-    
+
 }
 
 table {
@@ -74,11 +74,10 @@ th {
     width: 200px;
 }
 
-.workExpTD  {
-    
+.workExpTD {
     text-align: right;
 }
 
 .work {
-    width:100%;
+    width: 100%;
 }
