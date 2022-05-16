@@ -43,7 +43,8 @@ h1 {
 }
 
 .subtitle:hover {
-    font-size: 20px;
+    font-size: 18px;
+    align-items: center;
 }
 
 .inSubtitle {
@@ -66,12 +67,13 @@ table {
     font-size: larger;
 }
 
-th, td {
+th,
+td {
     text-align: left;
 }
 
 th {
-    width: 200px;
+    width: max-content;
 }
 
 .workExpTD {
