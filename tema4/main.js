@@ -27,13 +27,23 @@ let showValue = () => {
     alert(valueGiven);
 }
 
-let copySecondArray = mySecondArray;
-mySecondArray = [];
+let copySecondArray = mySecondArray.slice();
+copySecondArray = [];
 
 for (let i = 0; i < myArray.length; i++) {
-    copySecondArray[i] <= 4 ?
-        mySecondArray.push([copySecondArray[i], copySecondArray[i] + 1, copySecondArray[i] + 2])
-        : mySecondArray.push([copySecondArray[i], copySecondArray[i] - 1, copySecondArray[i] - 2])
+    if (mySecondArray[i] <= 4) {
+        copySecondArray.push([
+            mySecondArray[i],
+            mySecondArray[i] + 1,
+            mySecondArray[i] + 2
+        ]);
+    } else {
+        copySecondArray.push([
+            mySecondArray[i],
+            mySecondArray[i] - 1,
+            mySecondArray[i] - 2
+        ]);
+    }
 }
 console.log(mySecondArray);
 console.log(copySecondArray);
