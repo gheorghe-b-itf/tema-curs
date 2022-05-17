@@ -27,7 +27,14 @@ let showValue = () => {
     alert(valueGiven);
 }
 
+let copySecondArray = mySecondArray;
+mySecondArray = [];
+
 for (let i = 0; i < myArray.length; i++) {
-    // mySecondArray[i] = mySecondArray[i]<=4?[i, i++, i+2] : [i, i--, i-2]
+    copySecondArray[i] <= 4 ?
+        mySecondArray.push([copySecondArray[i], copySecondArray[i] + 1, copySecondArray[i] + 2])
+        : mySecondArray.push([copySecondArray[i], copySecondArray[i] - 1, copySecondArray[i] - 2])
 }
 console.log(mySecondArray);
+console.log(copySecondArray);
+
