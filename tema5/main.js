@@ -24,3 +24,11 @@ let checkPalindrom =(param)=>{
 }
 let z=prompt('its a palindrom?')
 let result =checkPalindrom(z)
+
+let checkBiggestWord=(word)=>{
+    let biggest='';
+    biggest =word.split(' ').sort((a,b)=>b.length-a.length)
+    console.log(biggest[0])
+}
+let y=prompt('check for biggest word')
+checkBiggestWord(y)
