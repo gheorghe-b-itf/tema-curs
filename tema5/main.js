@@ -45,7 +45,7 @@ let z = () => {
 }
 
 let y = () => {
-    let y = prompt('Check for biggest word')
+    let y = prompt('Write a sentence:')
     let checkBiggestWord = (word) => {
         let biggest = '';
         biggest = word.split(' ').sort((a, b) => b.length - a.length)
