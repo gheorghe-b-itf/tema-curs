@@ -48,13 +48,11 @@ thirdButton.addEventListener('click', function () {
     })
 });
 
-
 let numButtons = prompt('Give me a number of buttons you want:');
 
 for (let i = numButtons; (parseInt(numButtons) != numButtons) || (parseInt(numButtons) <= 0);) {
     if (parseInt(numButtons) != numButtons) {
         alert('I need a number to continue!')
-
     } else if (parseInt(numButtons) <= 0) {
         alert('I need a positive number to continue!')
     }
@@ -87,6 +85,3 @@ for (let i = 1; i <= numButtons; i++) {
         alert(`You've reach the end, there are no more buttons`);
 })
 }
-
-
-
