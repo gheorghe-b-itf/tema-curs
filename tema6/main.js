@@ -83,5 +83,54 @@ for (let i = 1; i <= numButtons; i++) {
         })
     } else button[i].addEventListener('click', function () {
         alert(`You've reach the end, there are no more buttons`);
-})
+    })
 }
+
+let createButton1 = function (name, action) {
+    let button = document.createElement('button');
+    button.innerHTML = name;
+    button.addEventListener('click', action);
+    return button;
+};
+let idDiv4 = document.getElementById('insiruire')
+const objectOfButtons = {
+    button1: false,
+    button2: false,
+    button3: false,
+    button4: false,
+    button5: false
+}
+
+const console = (e) => {
+    switch (e.target.innerHTML) {
+        case 'start': if (!objectOfButtons.button1) {
+            objectOfButtons.button1 = true
+            idDiv4.appendChild(createButton1('button1', console))
+        }
+            break
+        case 'button1': if (!objectOfButtons.button2) {
+            objectOfButtons.button2 = true
+            idDiv4.appendChild(createButton1('button2', console))
+        }
+            break
+        case 'button2': if (!objectOfButtons.button3) {
+            objectOfButtons.button3 = true
+            idDiv4.appendChild(createButton1('button3', console))
+        }
+            break
+        case 'button3': if (!objectOfButtons.button4) {
+            objectOfButtons.button4 = true
+            idDiv4.appendChild(createButton1('button4', console))
+        }
+            break
+        case 'button4': if (!objectOfButtons.button5) {
+            objectOfButtons.button5 = true
+            idDiv4.appendChild(createButton1('button5', console))
+        }
+            break
+        case 'button5': alert('It`s the end of buttons!')
+    }
+}
+
+let start = createButton1('start', console)
+idDiv4.appendChild(start)
