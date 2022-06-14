@@ -41,12 +41,12 @@ thirdButton.addEventListener('click', function () {
 
                         alert(`You've reach the end, there are no more buttons`)
 
-                    })
-                })
-            })
-        })
-    })
-});
+                    }, {once : true})
+                }, {once : true})
+            }, {once : true})
+        }, {once : true})
+    }, {once : true})
+}, {once : true});
 
 let numButtons = prompt('Give me a number of buttons you want:');
 
