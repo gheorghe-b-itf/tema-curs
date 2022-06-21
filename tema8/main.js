@@ -7,9 +7,8 @@ let launch = function () {
     button.style.display = 'none';
     divTable.style.display = 'block';
     table.style.textAlign = 'center';
-    table.setAttribute('border', '1');
-    let data = []
 
+    let data = []
 
     axios
         .get('https://api.spacexdata.com/v4/crew')
@@ -19,19 +18,15 @@ let launch = function () {
             console.log(data);
             for (let i = 0; i < data.length; i++) {
                 let tr = document.createElement('tr');
-                // for (let j = 0; j < 2; j++) {
-                    let td1 = document.createElement('td');
-                    td1.appendChild(document.createTextNode(i + 1))
+                let td1 = document.createElement('td');
+                let td2 = document.createElement('td');
 
-                    let td2 = document.createElement('td');
-                    td2.appendChild(document.createTextNode(data[i].name))
-        
-                    // console.log(cell)
-                    tr.appendChild(td1);
-                    tr.appendChild(td2);
-                // }
+                td1.appendChild(document.createTextNode(i + 1))
+                td2.appendChild(document.createTextNode(data[i].name))
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
                 table.appendChild(tr);
-                // divTable.appendChild(table);
             }
         })
         .catch(function (error) {
@@ -39,10 +34,7 @@ let launch = function () {
             console.log(error);
         })
         ;
-    console.log(data);
 }
-
-
 
 button.addEventListener('click', launch)
 
