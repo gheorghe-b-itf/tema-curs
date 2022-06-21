@@ -1,7 +1,7 @@
 
 let button = document.querySelector('.launch')
 let divTable = document.getElementById('table');
-let table = document.querySelector('.table');
+let table = document.querySelector('.table > tbody');
 let launch = function () {
 
     button.style.display = 'none';
@@ -31,7 +31,7 @@ let launch = function () {
                     tr.appendChild(td2);
                 // }
                 table.appendChild(tr);
-                divTable.appendChild(table);
+                // divTable.appendChild(table);
             }
         })
         .catch(function (error) {
