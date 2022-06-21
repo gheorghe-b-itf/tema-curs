@@ -17,7 +17,22 @@ let launch = function () {
             // success
             data = response.data;
             console.log(data);
-            return data
+            for (let i = 0; i < data.length; i++) {
+                let tr = document.createElement('tr');
+                // for (let j = 0; j < 2; j++) {
+                    let td1 = document.createElement('td');
+                    td1.appendChild(document.createTextNode(i + 1))
+
+                    let td2 = document.createElement('td');
+                    td2.appendChild(document.createTextNode(data[i].name))
+        
+                    // console.log(cell)
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                // }
+                table.appendChild(tr);
+                divTable.appendChild(table);
+            }
         })
         .catch(function (error) {
             // error
@@ -25,19 +40,6 @@ let launch = function () {
         })
         ;
     console.log(data);
-
-    for (let i = 0; i < 3; i++) {
-        let tr = document.createElement('tr');
-        for (let j = 0; j < 2; j++) {
-            let td = document.createElement('td');
-            td.appendChild(document.createTextNode('x'))
-
-            // console.log(cell)
-            tr.appendChild(td)
-        }
-        table.appendChild(tr);
-        divTable.appendChild(table);
-    }
 }
 
 
