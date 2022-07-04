@@ -1,0 +1,27 @@
+img {
+    margin: 10px 15px 10px 3px;
+    height: 300px;
+    width: auto;
+}
+
+div {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+}
+
+h5 {
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 14px;
+    color: rgb(255, 0, 0);
+    font-family: cursive;
+}
+
+.title {
+    position: relative;
+    justify-content: center;
+    color: darkcyan;
+    font-family: cursive;
+}
