@@ -10,11 +10,15 @@ for (new Date(a, b, c); new Date(a, b, c) < new Date(); c += 6) {
 
     date = new Date(a, b, c)
     console.log(new Date(a, b, c))
+    let content = document.getElementById("this")
+    let div = document.createElement('div')
+    div.classList.add('divClass')
     
-    let scopeDate = document.createTextNode(date)
-    document.getElementById("this").appendChild(scopeDate)
+    let scopeDate = document.createTextNode(date.toUTCString())
+    div.appendChild(scopeDate)
+    content.appendChild(div)
 
     let br = document.createElement('br')
-    document.getElementById("this").appendChild(br)
+    content.appendChild(br)
 
 }
