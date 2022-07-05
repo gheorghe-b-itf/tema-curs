@@ -14,7 +14,7 @@ for (new Date(a, b, c); new Date(a, b, c) < new Date(); c += 6) {
     let div = document.createElement('div')
     div.classList.add('divClass')
     
-    let scopeDate = document.createTextNode(date.toUTCString())
+    let scopeDate = document.createTextNode(date.toDateString())
     div.appendChild(scopeDate)
     content.appendChild(div)
 
