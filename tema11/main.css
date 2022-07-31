@@ -1,5 +1,5 @@
 body {
-    background-color:paleturquoise
+    background-color: paleturquoise
 }
 
 .title>h1 {
@@ -19,7 +19,7 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 
@@ -30,7 +30,7 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 .itemCalendar {
@@ -49,12 +49,16 @@ body {
 }
 
 .curentDay {
-    position: absolute;
-    border: 50px solid rgb(47, 31, 184);
+    position: relative;
+    line-height: 97px;
+    left: 45px;
+    border: 5px solid rgb(47, 31, 184);
     border-radius: 50%;
-    justify-content: center;
-    align-items: center;
-
+    font-size: 30px;
+    text-align: center;
+    height: 100px;
+    width: 100px;
+    
 }
 
 .launchDate {

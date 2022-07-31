@@ -10,28 +10,24 @@ obj = {
     init: function () {
         axios
             .get('https://api.spacexdata.com/v4/launches')
-            .then(function(response) {
+            .then(function (response) {
                 // success
                 obj.allDataLauches = response.data;
-                
+
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // error
                 console.log(error);
             })
+            ;
+        console.log(obj)
+        for (let i in obj.allDataLauches) {
+            obj.dataLauches.name = obj.allDataLauches[i].name
+            date.push(obj.allDataLauches[i].date_utc)
+            obj.dataLauches.details.push(obj.allDataLauches[i].details)
+            obj.dataLauches.youtubeLink.push(obj.allDataLauches[i].links.webcast)
 
-            for(let i = 0; i < obj.allDataLauches.length; i++) {
-                obj.dataLauches.name= obj.allDataLauches[i].name
-                date.push(obj.allDataLauches[i].date_utc)
-                obj.dataLauches.details.push(obj.allDataLauches[i].details)
-                obj.dataLauches.youtubeLink.push(obj.allDataLauches[i].links.webcast)
-    
-            }
-        ;
-        let date = []
-
-        
-        console.log(date)
+        }
     }
 }
 obj.init();
@@ -67,6 +63,8 @@ let createDynamicCalendar = function () {
     let divContainer = document.querySelector('.grid-container');
     let daysInMonth = moment(new Date(dateWrapper)).daysInMonth()
     let startOfMonth = moment(new Date(dateWrapper)).startOf('month').format('dddd')
+    let curentDay = moment(new Date(dateWrapper)).format("D")
+
 
     while (k <= daysInMonth) {
 
@@ -75,6 +73,7 @@ let createDynamicCalendar = function () {
             case 1:   //create the starting point of calendar
                 for (let i = 0; i < dayNames.length; i++) {
 
+                    
                     if (startOfMonth !== dayNames[i]) {
                         let divItem = document.createElement('div');
                         divContainer.appendChild(divItem);
@@ -84,7 +83,11 @@ let createDynamicCalendar = function () {
                         let divItem = document.createElement('div');
                         divItem.innerText = '1'
                         divContainer.appendChild(divItem);
-                        divItem.classList.add("itemCalendar");
+                        if (curentDay == k) {
+                            divItem.classList.add("curentDay");
+                        } else {
+                            divItem.classList.add("itemCalendar");
+                        }
 
                         // if(launchDate == new Date(a,b,k)) {    //finding launch date
                         //     let divItemLaunch = document.createElement('div');
@@ -100,7 +103,12 @@ let createDynamicCalendar = function () {
                 let divItem = document.createElement('div');
                 divItem.innerText = k;
                 divContainer.appendChild(divItem);
-                divItem.classList.add("itemCalendar");
+
+                if (curentDay == k) {
+                    divItem.classList.add("curentDay");
+                } else {
+                    divItem.classList.add("itemCalendar");
+                }
 
                 // if(launchDate == new Date(a,b,k)) {       //finding launch date
                 //     let divItemLaunch = document.createElement('div');
