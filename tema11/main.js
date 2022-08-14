@@ -78,7 +78,7 @@ let createDynamicCalendar = function (selectedMonth) {
 
     //create a dynamic title of calendar
     let dateWrapper = moment(date)._d.toString()
-    document.querySelector('.title>h1').innerText = moment(new Date(dateWrapper)).format("MMMM")
+    document.querySelector('.title>h1').innerText = moment(new Date(dateWrapper)).format("MMMM YYYY")
 
     document.querySelector('.prevMonth').innerHTML = moment(new Date(dateWrapper)).subtract(1, 'months').format("MMMM")
     document.querySelector('.nextMonth').innerHTML = moment(new Date(dateWrapper)).add(1, 'months').format("MMMM")
