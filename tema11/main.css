@@ -2,31 +2,30 @@ body {
     background-color: paleturquoise
 }
 
-.title>h1 {
+.container {
     color: rgb(94, 94, 247);
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin: 30px;
     font-size: 50px;
     font-family: 'Courier New', Courier, monospace;
 }
 
+
 .grid-header {
     display: grid;
-    grid-template-columns: 200px 200px 200px 200px 200px 200px 200px;
-    grid-template-rows: 200px;
-    width: 100%;
+    grid-template-columns: repeat(7, 200px);
     justify-content: center;
-    align-items: center;
-
+    
 }
 
 
 .grid-container {
     display: grid;
-    grid-template-columns: 200px 200px 200px 200px 200px 200px 200px;
-    grid-template-rows: 200px 200px 200px 200px 200px 200px 200px;
+    grid-template-columns: repeat(7, 200px);
+
+    grid-template-rows: repeat(7, 200px);
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -52,7 +51,7 @@ body {
     position: relative;
     line-height: 97px;
     left: 45px;
-    border: 5px solid rgb(47, 31, 184);
+    border: 5px solid rgb(184, 31, 120);
     border-radius: 50%;
     font-size: 30px;
     text-align: center;
