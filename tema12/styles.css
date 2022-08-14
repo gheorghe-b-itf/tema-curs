@@ -1,0 +1,13 @@
+body {
+    background-color: paleturquoise
+}
+
+.container {
+    color: rgb(94, 94, 247);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px;
+    font-size: 50px;
+    font-family: 'Courier New', Courier, monospace;
+}
