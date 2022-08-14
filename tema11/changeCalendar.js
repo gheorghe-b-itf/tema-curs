@@ -2,14 +2,14 @@ let changeCalendar = function () {
 
 
     document.querySelector('.prevMonth').addEventListener("click", () => {
-        month = month - 1;
-        createDynamicCalendar()
+        obj.selectedMonth.month = obj.selectedMonth.month - 1;
+        createDynamicCalendar(obj.selectedMonth);
     })
 
     document.querySelector('.nextMonth').addEventListener("click", () => {
-        month = month + 1;
-        createDynamicCalendar()
+        obj.selectedMonth.month = obj.selectedMonth.month + 1;
+        createDynamicCalendar(obj.selectedMonth);
     })
 }
 
-// changeCalendar();
+changeCalendar();

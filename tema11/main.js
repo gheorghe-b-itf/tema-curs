@@ -14,6 +14,12 @@
 // veti lua acest an si luna si veti crea un moment nou, in functie de care desentati in pagina ce e de desenat
 
 
+// home work fixes next steps:
+// 1. make sure that in the changeCalendar file, you also increment or decrement the year
+// 2. copy with copy/paste, from our main project, the getLaunchesForMonthAndYear function and use it
+// 3. in the places where you wanted to encircle the current day, encircle all days that you get at step #2
+// 4. maybe resolve the issue with having the if inside the while... you can do a for and a while
+// in order to put in place the empty cells with the for
 
 let obj = {
     allDataLauches: [],
@@ -24,8 +30,8 @@ let obj = {
         youtubeLink: []
     },
     selectedMonth: {
-        month: null, // initializam asta cu luna curenta pe care ne-o da moment
-        year: null // initilizam cu anul curent
+        month: moment().month() + 1, // initializam asta cu luna curenta pe care ne-o da moment
+        year: moment().year() // initilizam cu anul curent
     },
     init: function () {
         axios
@@ -37,7 +43,7 @@ let obj = {
                 console.log(obj)
                 for (let i in obj.allDataLauches) {
                     obj.dataLauches.name = obj.allDataLauches[i].name
-                    date.push(obj.allDataLauches[i].date_utc)
+                    // date.push(obj.allDataLauches[i].date_utc)
                     obj.dataLauches.details.push(obj.allDataLauches[i].details)
                     obj.dataLauches.youtubeLink.push(obj.allDataLauches[i].links.webcast)
 
@@ -54,26 +60,34 @@ obj.init();
 
 console.log(obj)
 
-let createDynamicCalendar = function (month) {
+let createDynamicCalendar = function (selectedMonth) {
 
     //create a Date obj that I can modify as I need
-    let curentDateArr = moment(new Date()).format("ddd DD M YYYY").split(' ')
+    // let curentDateArr = moment(new Date()).format("ddd DD M YYYY").split(' ')
+    let curentDateArr = moment()
+        .year(selectedMonth.year)
+        .month(selectedMonth.month - 1)
+        .startOf('month')
+        .format("ddd DD M YYYY")
+        .split(' ')
+    ;
     let year = curentDateArr[3];
-    month = curentDateArr[2] - 1;
+    let month = curentDateArr[2] - 1;
     let day = curentDateArr[1];
     let date = new Date(year, month, day);
 
     //create a dynamic title of calendar
     let dateWrapper = moment(date)._d.toString()
-    let title = document.querySelector('.title>h1').innerText = moment(new Date(dateWrapper)).format("MMMM")
+    document.querySelector('.title>h1').innerText = moment(new Date(dateWrapper)).format("MMMM")
 
-    let prevMonthText = document.querySelector('.prevMonth').innerHTML = moment(new Date(dateWrapper)).subtract(1, 'months').format("MMMM")
-    let nextMonthText = document.querySelector('.nextMonth').innerHTML = moment(new Date(dateWrapper)).add(1, 'months').format("MMMM")
+    document.querySelector('.prevMonth').innerHTML = moment(new Date(dateWrapper)).subtract(1, 'months').format("MMMM")
+    document.querySelector('.nextMonth').innerHTML = moment(new Date(dateWrapper)).add(1, 'months').format("MMMM")
 
 
     //create header of calendar 
     let dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     let gridHeader = document.querySelector('.grid-header')
+    gridHeader.innerHTML = '';
 
     for (let i = 0; i < dayNames.length; i++) {
         let divHead = document.createElement('div');
@@ -85,76 +99,75 @@ let createDynamicCalendar = function (month) {
     //create the actual container of calendar
     let k = 1;
     let divContainer = document.querySelector('.grid-container');
+    divContainer.innerHTML = '';
     let daysInMonth = moment(new Date(dateWrapper)).daysInMonth()
     let startOfMonth = moment(new Date(dateWrapper)).startOf('month').format('dddd')
     let curentDay = moment(new Date(dateWrapper))
 
 
     while (k <= daysInMonth) {
-        switch (k) {
-            case 1:   //create the starting point of calendar
+        if (k === 1) {
                 for (let i = 0; i < dayNames.length; i++) {
 
                     
-                        console.log(obj.dataLauches.date_utc)
-                        let isCircledDay = false;
-                        for (let j = 0; j < obj.dataLauches.date_utc.length; j++) {
-                            let launchItem = obj.dataLauches.date_utc[j];
-                            let itemDateString = launchItem.split('T')[0];
-                            let itemDay = itemDateString.split('-')[2];
-                            if (parseInt(itemDay) === i) {
-                                isCircledDay = true;
-                                divItem.classList.add("curentDay");
-                            }
-                        }
+                        // console.log(obj.dataLauches.date_utc)
+                        // let isCircledDay = false;
+                        // for (let j = 0; j < obj.dataLauches.date_utc.length; j++) {
+                        //     let launchItem = obj.dataLauches.date_utc[j];
+                        //     let itemDateString = launchItem.split('T')[0];
+                        //     let itemDay = itemDateString.split('-')[2];
+                        //     if (parseInt(itemDay) === i) {
+                        //         isCircledDay = true;
+                        //         divItem.classList.add("curentDay");
+                        //     }
+                        // }
                         
 
                     if (startOfMonth !== dayNames[i]) {
                         let divItem = document.createElement('div');
-                        divContainer.appendChild(divItem);
                         divItem.classList.add("itemCalendar");
+                        divContainer.appendChild(divItem);
 
                     } else {
                         let divItem = document.createElement('div');
                         divItem.innerText = '1'
                         divContainer.appendChild(divItem);
-                        if (curentDay._d.toString() == moment(new Date(year, month, k))._d.toString()) {
-                            divItem.classList.add("curentDay");
+                        // if (curentDay._d.toString() == moment(new Date(year, month, k))._d.toString()) {
+                        //     divItem.classList.add("curentDay");
 
-                        } else {
+                        // } else {
                             divItem.classList.add("itemCalendar");
-                        }
+                        // }
 
                         break;
                     }
                 }
-                break;
-            default:
+                // break;
+        } else {
 
-                obj.dataLauches.date_utc
-                let isCircledDay = false;
-                for (let j = 0; j < obj.dataLauches.date_utc.length; j++) {
-                    let launchItem = obj.dataLauches.date_utc[j];
-                    let itemDateString = launchItem.split('T')[0];
-                    let itemDay = itemDateString.split('-')[2];
-                    if (parseInt(itemDay) === i) {
-                        isCircledDay = true;
-                        divItem.classList.add("curentDay");
-                    }
-                }
+                // let isCircledDay = false;
+                // for (let j = 0; j < obj.dataLauches.date_utc.length; j++) {
+                //     let launchItem = obj.dataLauches.date_utc[j];
+                //     let itemDateString = launchItem.split('T')[0];
+                //     let itemDay = itemDateString.split('-')[2];
+                //     if (parseInt(itemDay) === i) {
+                //         isCircledDay = true;
+                //         divItem.classList.add("curentDay");
+                //     }
+                // }
 
                 let divItem = document.createElement('div');
                 divItem.innerText = k;
                 divContainer.appendChild(divItem);
 
-                if (curentDay._d.toString() == moment(new Date(year, month, k))._d.toString()) {
-                    divItem.classList.add("curentDay");
+                // if (curentDay._d.toString() == moment(new Date(year, month, k))._d.toString()) {
+                //     divItem.classList.add("curentDay");
 
-                } else {
+                // } else {
                     divItem.classList.add("itemCalendar");
-                }
+                // }
 
-                break;
+                // break;
         }
         k++;
     }
@@ -162,20 +175,5 @@ let createDynamicCalendar = function (month) {
     
 }
 
-let changeCalendar = function () {
-
-
-    document.querySelector('.prevMonth').addEventListener("click", () => {
-        month = month - 1;
-        createDynamicCalendar()
-    })
-
-    document.querySelector('.nextMonth').addEventListener("click", () => {
-        month = month + 1;
-        createDynamicCalendar()
-    })
-}
-
-changeCalendar();
-createDynamicCalendar();
+createDynamicCalendar(obj.selectedMonth);
 
