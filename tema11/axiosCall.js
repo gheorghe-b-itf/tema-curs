@@ -6,6 +6,10 @@ window.obj = {
         details: [],
         youtubeLink: []
     },
+    selectedMonth: {
+        month: moment().month() + 1, // initializam asta cu luna curenta pe care ne-o da moment
+        year: moment().year() // initilizam cu anul curent
+    },
     init: function () {
         axios
             .get('https://api.spacexdata.com/v4/launches')

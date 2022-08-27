@@ -20,57 +20,34 @@
 // 3. in the places where you wanted to encircle the current day, encircle all days that you get at step #2
 // 4. maybe resolve the issue with having the if inside the while... you can do a for and a while
 // in order to put in place the empty cells with the for
-
-let obj = {
-    allDataLauches: [],
-    dataLauches: {
-        name: [],
-        date_utc: [],
-        details: [],
-        youtubeLink: []
-    },
-    selectedMonth: {
-        month: moment().month() + 1, // initializam asta cu luna curenta pe care ne-o da moment
-        year: moment().year() // initilizam cu anul curent
-    },
-    init: function () {
-        axios
-            .get('https://api.spacexdata.com/v4/launches')
-            .then(function (response) {
-                // success
-                obj.allDataLauches = response.data;
-
-                console.log(obj)
-                for (let i in obj.allDataLauches) {
-                    obj.dataLauches.name = obj.allDataLauches[i].name
-                    // date.push(obj.allDataLauches[i].date_utc)
-                    obj.dataLauches.details.push(obj.allDataLauches[i].details)
-                    obj.dataLauches.youtubeLink.push(obj.allDataLauches[i].links.webcast)
-
-                }
-            })
-            .catch(function (error) {
-                // error
-                console.log(error);
-            })
-        ;
+let getLaunchesForMonthAndYear = function (
+    year, // as number
+    month, // as number
+    allLaunches
+) {
+    let resultLaunches = [];
+    for (let i = 0; i < obj.allDataLauches.length; i++) {
+        let item = obj.allDataLauches[i];
+        let itemDate = item.date_utc;
+        let itemYear = itemDate.split('-')[0];
+        let itemMonth = itemDate.split('-')[1];
+        if (parseInt(itemYear) === year && parseInt(itemMonth) === month) {
+            resultLaunches.push(item);
+        }
     }
+    return resultLaunches;
 };
-obj.init();
-
-console.log(obj)
-
 let createDynamicCalendar = function (selectedMonth) {
 
     //create a Date obj that I can modify as I need
-    // let curentDateArr = moment(new Date()).format("ddd DD M YYYY").split(' ')
+
     let curentDateArr = moment()
-        .year(selectedMonth.year)
-        .month(selectedMonth.month - 1)
+        .year(obj.selectedMonth.year)
+        .month(obj.selectedMonth.month - 1)
         .startOf('month')
         .format("ddd DD M YYYY")
         .split(' ')
-    ;
+        ;
     let year = curentDateArr[3];
     let month = curentDateArr[2] - 1;
     let day = curentDateArr[1];
@@ -80,8 +57,8 @@ let createDynamicCalendar = function (selectedMonth) {
     let dateWrapper = moment(date)._d.toString()
     document.querySelector('.title>h1').innerText = moment(new Date(dateWrapper)).format("MMMM YYYY")
 
-    document.querySelector('.prevMonth').innerHTML = moment(new Date(dateWrapper)).subtract(1, 'months').format("MMMM")
-    document.querySelector('.nextMonth').innerHTML = moment(new Date(dateWrapper)).add(1, 'months').format("MMMM")
+    document.querySelector('.prevMonth').innerHTML = '&#8249 ' + moment(new Date(dateWrapper)).subtract(1, 'months').format("MMMM")
+    document.querySelector('.nextMonth').innerHTML = moment(new Date(dateWrapper)).add(1, 'months').format("MMMM") + ' &#8250;'
 
 
     //create header of calendar 
@@ -107,73 +84,58 @@ let createDynamicCalendar = function (selectedMonth) {
 
     while (k <= daysInMonth) {
         if (k === 1) {
-                for (let i = 0; i < dayNames.length; i++) {
+            for (let i = 0; i < dayNames.length; i++) {
 
-                    
-                        // console.log(obj.dataLauches.date_utc)
-                        // let isCircledDay = false;
-                        // for (let j = 0; j < obj.dataLauches.date_utc.length; j++) {
-                        //     let launchItem = obj.dataLauches.date_utc[j];
-                        //     let itemDateString = launchItem.split('T')[0];
-                        //     let itemDay = itemDateString.split('-')[2];
-                        //     if (parseInt(itemDay) === i) {
-                        //         isCircledDay = true;
-                        //         divItem.classList.add("curentDay");
-                        //     }
-                        // }
-                        
+                if (startOfMonth !== dayNames[i]) {
+                    let divItem = document.createElement('div');
+                    divItem.classList.add("itemCalendar");
+                    divContainer.appendChild(divItem);
 
-                    if (startOfMonth !== dayNames[i]) {
-                        let divItem = document.createElement('div');
-                        divItem.classList.add("itemCalendar");
-                        divContainer.appendChild(divItem);
+                } else {
+                    let divItem = document.createElement('div');
+                    divItem.innerText = '1'
+                    divContainer.appendChild(divItem);
+                    divItem.classList.add("itemCalendar");
 
-                    } else {
-                        let divItem = document.createElement('div');
-                        divItem.innerText = '1'
-                        divContainer.appendChild(divItem);
-                        // if (curentDay._d.toString() == moment(new Date(year, month, k))._d.toString()) {
-                        //     divItem.classList.add("curentDay");
 
-                        // } else {
-                            divItem.classList.add("itemCalendar");
-                        // }
-
-                        break;
-                    }
+                    break;
                 }
-                // break;
+            }
+
         } else {
 
-                // let isCircledDay = false;
-                // for (let j = 0; j < obj.dataLauches.date_utc.length; j++) {
-                //     let launchItem = obj.dataLauches.date_utc[j];
-                //     let itemDateString = launchItem.split('T')[0];
-                //     let itemDay = itemDateString.split('-')[2];
-                //     if (parseInt(itemDay) === i) {
-                //         isCircledDay = true;
-                //         divItem.classList.add("curentDay");
-                //     }
-                // }
+            let divItem = document.createElement('div');
+            divItem.innerText = k;
+            divContainer.appendChild(divItem);
 
-                let divItem = document.createElement('div');
-                divItem.innerText = k;
-                divContainer.appendChild(divItem);
+            divItem.classList.add("itemCalendar");
 
-                // if (curentDay._d.toString() == moment(new Date(year, month, k))._d.toString()) {
-                //     divItem.classList.add("curentDay");
-
-                // } else {
-                    divItem.classList.add("itemCalendar");
-                // }
-
-                // break;
         }
         k++;
+
+
     }
+    let currentMonthLaunches = getLaunchesForMonthAndYear(obj.selectedMonth.year, obj.selectedMonth.month, obj.allDataLaunches);
 
-    
+    for (let i = 0; i < daysInMonth; i++) {
+        let isCircledDay = false;
+        for (let j = 0; j < currentMonthLaunches.length; j++) {
+            let launchItem = currentMonthLaunches[j];
+            let itemDateString = launchItem.date_utc.split('T')[0];
+            let itemDay = itemDateString.split('-')[2];
+            if (parseInt(itemDay) === i) {
+                isCircledDay = true;
+            }
+        }
+        if (isCircledDay) {
+            let divItem = document.createElement('div');
+
+            divItem.classList.add('launchDay');
+            divContainer.appendChild(divItem);
+
+        }
+        
+    }
 }
-
-createDynamicCalendar(obj.selectedMonth);
+    createDynamicCalendar(obj.selectedMonth);
 
